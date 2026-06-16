@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #070c13;
+    color: #c8d8e8;
+    font-family: 'Rajdhani', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0e1620;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e2e42;
+    border-radius: 3px;
+  }
+}
+
+@layer components {
+  .scan-line {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(232, 128, 10, 0.03) 2px,
+      rgba(232, 128, 10, 0.03) 4px
+    );
+    pointer-events: none;
+  }
+
+  .hex-border {
+    clip-path: polygon(
+      8px 0%,
+      calc(100% - 8px) 0%,
+      100% 8px,
+      100% calc(100% - 8px),
+      calc(100% - 8px) 100%,
+      8px 100%,
+      0% calc(100% - 8px),
+      0% 8px
+    );
+  }
+
+  .corner-cut {
+    clip-path: polygon(
+      0 0,
+      calc(100% - 16px) 0,
+      100% 16px,
+      100% 100%,
+      16px 100%,
+      0 calc(100% - 16px)
+    );
+  }
+
+  .glow-orange {
+    box-shadow: 0 0 20px rgba(232, 128, 10, 0.3), 0 0 40px rgba(232, 128, 10, 0.1);
+  }
+
+  .glow-green {
+    box-shadow: 0 0 12px rgba(39, 174, 96, 0.4);
+  }
+
+  .glow-red {
+    box-shadow: 0 0 12px rgba(192, 57, 43, 0.4);
+  }
+
+  .glow-yellow {
+    box-shadow: 0 0 12px rgba(243, 156, 18, 0.4);
+  }
+}
+
+@keyframes scanMove {
+  from { background-position: 0 0; }
+  to { background-position: 0 100px; }
+}
+
+@keyframes borderPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes countdown-ring {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 251; }
+}
