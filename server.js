@@ -1,5 +1,8 @@
 import 'dotenv/config';
 import express from 'express';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import { existsSync } from 'fs';
 import * as cheerio from 'cheerio';
 
 const app = express();
@@ -166,6 +169,13 @@ app.get('/api/status', async (_req, res) => {
     res.status(502).json({ ...getMockData(), error: err.message });
   }
 });
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const distPath = join(__dirname, 'dist');
+if (existsSync(distPath)) {
+  app.use(express.static(distPath));
+  app.get('*', (_req, res) => res.sendFile(join(distPath, 'index.html')));
+}
 
 app.listen(PORT, () => {
   console.log(`Division 2 Status API → http://localhost:${PORT}/api/status`);

@@ -3,7 +3,6 @@ dist/
 .env
 **/.env
 *.env
-**/*.env
-CLAUDE.md
 .DS_Store
 **/.DS_Store
+CLAUDE.md

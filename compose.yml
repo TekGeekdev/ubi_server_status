@@ -1,0 +1,16 @@
+services:
+  div2-status:
+    build: .
+    container_name: div2-status
+    restart: unless-stopped
+    environment:
+      - PORT=${PORT}
+      - UBI_STATUS_APP_IDS=${UBI_STATUS_APP_IDS}
+      - UBI_APP_ID=${UBI_APP_ID}
+    networks:
+      - gateway
+
+networks:
+  gateway:
+    external: true
+    name: ${GATEWAY_NETWORK}
