@@ -8,6 +8,7 @@ export function useServerStatus() {
   const [error, setError] = useState(null);
   const [countdown, setCountdown] = useState(REFRESH_INTERVAL);
   const [lastFetch, setLastFetch] = useState(null);
+  const [paused, setPaused] = useState(false);
   const countdownRef = useRef(null);
 
   const fetchStatus = useCallback(async () => {
@@ -33,6 +34,11 @@ export function useServerStatus() {
   }, [fetchStatus]);
 
   useEffect(() => {
+    if (paused) {
+      clearInterval(countdownRef.current);
+      return;
+    }
+
     countdownRef.current = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
@@ -44,7 +50,14 @@ export function useServerStatus() {
     }, 1000);
 
     return () => clearInterval(countdownRef.current);
-  }, [fetchStatus]);
+  }, [fetchStatus, paused]);
+
+  const togglePause = useCallback(() => {
+    setPaused((p) => {
+      if (p) setCountdown(REFRESH_INTERVAL);
+      return !p;
+    });
+  }, []);
 
   return {
     data,
@@ -54,5 +67,7 @@ export function useServerStatus() {
     lastFetch,
     refresh: fetchStatus,
     REFRESH_INTERVAL,
+    paused,
+    togglePause,
   };
 }

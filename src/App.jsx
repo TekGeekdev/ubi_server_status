@@ -13,7 +13,7 @@ function formatTime(date, locale) {
 }
 
 export default function App() {
-  const { data, loading, error, countdown, lastFetch, refresh, REFRESH_INTERVAL } = useServerStatus();
+  const { data, loading, error, countdown, lastFetch, refresh, REFRESH_INTERVAL, paused, togglePause } = useServerStatus();
   const { t, locale } = useTranslation();
 
   const platforms = data?.platforms || [];
@@ -68,6 +68,8 @@ export default function App() {
                 total={REFRESH_INTERVAL}
                 onRefresh={refresh}
                 loading={loading}
+                paused={paused}
+                onTogglePause={togglePause}
               />
             </div>
           </div>
