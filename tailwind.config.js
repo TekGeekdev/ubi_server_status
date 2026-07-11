@@ -7,6 +7,7 @@ export default {
         div2: {
           bg: '#070c13',
           surface: '#0e1620',
+          'surface-raised': '#152232',
           border: '#1e2e42',
           orange: '#e8800a',
           'orange-light': '#f59e2e',
