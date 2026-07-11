@@ -74,6 +74,34 @@ async function fetchStatus() {
   };
 }
 
+// Cache court : une seule requête Ubisoft par fenêtre de 90 s quel que soit le
+// nombre de visiteurs (l'auto-refresh du front est à 120 s), et partage de la
+// requête en cours entre appels simultanés pour éviter les rafales (HTTP 429).
+const STATUS_CACHE_TTL = 90 * 1000;
+const STATUS_CACHE = { data: null, fetchedAt: 0 };
+let statusInflight = null;
+
+async function getStatus() {
+  const now = Date.now();
+  if (STATUS_CACHE.data && now - STATUS_CACHE.fetchedAt < STATUS_CACHE_TTL) {
+    return STATUS_CACHE.data;
+  }
+
+  if (!statusInflight) {
+    statusInflight = fetchStatus()
+      .then((data) => {
+        STATUS_CACHE.data = data;
+        STATUS_CACHE.fetchedAt = Date.now();
+        return data;
+      })
+      .finally(() => {
+        statusInflight = null;
+      });
+  }
+
+  return statusInflight;
+}
+
 function getMockData() {
   return {
     platforms: [
@@ -162,10 +190,16 @@ app.get('/api/status', async (_req, res) => {
   res.setHeader('Cache-Control', 'no-cache');
 
   try {
-    const data = await fetchStatus();
+    const data = await getStatus();
     res.json(data);
   } catch (err) {
     console.error('Ubisoft API error:', err.message);
+    // Dernière réponse valide connue plutôt que le mock : les statuts restent
+    // réels (marqués 'stale'), le mock ne sert que si l'on n'a jamais rien reçu
+    if (STATUS_CACHE.data) {
+      res.json({ ...STATUS_CACHE.data, source: 'stale', error: err.message });
+      return;
+    }
     res.status(502).json({ ...getMockData(), error: err.message });
   }
 });
