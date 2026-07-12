@@ -1,5 +1,6 @@
 import { useHashRoute } from './hooks/useHashRoute';
 import { NavMenu } from './components/NavMenu';
+import { SiteFooter } from './components/SiteFooter';
 import { StatusPage } from './pages/StatusPage';
 import { AugmentsPage } from './pages/AugmentsPage';
 import { DamagePage } from './pages/DamagePage';
@@ -37,6 +38,7 @@ export default function App() {
       <div className="relative z-10 max-w-[996px] mx-auto px-4 py-10">
         <NavMenu route={route} />
         <Page />
+        <SiteFooter showRefreshNote={route === 'status'} />
       </div>
     </div>
   );
