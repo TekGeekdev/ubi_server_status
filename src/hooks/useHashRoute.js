@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const ROUTES = ['status', 'augments', 'damage'];
+export const ROUTES = ['status', 'augments', 'damage', 'expertise'];
 const DEFAULT_ROUTE = 'status';
 
 function parseRoute() {

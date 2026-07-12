@@ -147,6 +147,9 @@ export function DamagePage() {
             { label: t('damage.result.crit'), value: formatNumber(critShot) },
             { label: t('damage.result.head'), value: formatNumber(headShot) },
             { label: t('damage.result.critHead'), value: formatNumber(critHeadShot), highlight: true },
+            // Écho répète les dégâts du tir une seconde fois : affiché à titre
+            // indicatif, exclu des moyennes et des DPS (c'est un proc aléatoire)
+            { label: t('damage.result.echo'), value: formatNumber(critHeadShot * 2) },
             { label: t('damage.result.avg'), value: formatNumber(avgBullet) },
             { label: t('damage.result.burst'), value: formatNumber(burstDps(avgBullet, weapon.rpm)) },
             {

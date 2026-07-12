@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matrice de coûts d'expertise — Y7S1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --void: #07090a;
+        --panel: #0d1110;
+        --panel-2: #0a0d0c;
+        --line: #1c2422;
+        --line-soft: #141a18;
+        --ink: #d9e0dc;
+        --ink-dim: #5f6b67;
+        --accent: #ff7a1a;
+        --green: #5fd66a;
+        --blue: #4fa8ea;
+        --orange: #f2a53d;
+        --red: #e2593f;
+        --pink: #e2508a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: var(--void);
+        color: var(--ink);
+        font-family: 'JetBrains Mono', monospace;
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* subtle scanline / CRT texture */
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.018) 0px,
+          rgba(255, 255, 255, 0.018) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+        z-index: 50;
+      }
+      body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(
+          ellipse at 50% 0%,
+          rgba(255, 122, 26, 0.05),
+          transparent 55%
+        );
+        z-index: 1;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .pulse {
+          animation: pulse 2.4s ease-in-out infinite;
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.35;
+        }
+      }
+
+      .wrap {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 28px 20px 60px;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* ---------- HEADER ---------- */
+      header {
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, var(--panel), var(--panel-2));
+        padding: 22px 24px;
+        margin-bottom: 22px;
+        position: relative;
+      }
+      header::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--accent);
+      }
+      .eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        color: var(--accent);
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .eyebrow .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 8px var(--accent);
+      }
+      h1 {
+        font-family: 'Rajdhani', sans-serif;
+        font-weight: 700;
+        font-size: clamp(22px, 3.2vw, 34px);
+        letter-spacing: 0.02em;
+        margin: 0 0 4px;
+        text-transform: uppercase;
+        color: #f2f5f3;
+      }
+      h1 span {
+        color: var(--ink-dim);
+        font-weight: 600;
+      }
+      .sub {
+        font-size: 12.5px;
+        color: var(--ink-dim);
+        letter-spacing: 0.03em;
+      }
+      .sub b {
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      /* ---------- READOUT (signature element) ---------- */
+      .readout {
+        margin-top: 16px;
+        border-top: 1px dashed var(--line);
+        padding-top: 14px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 22px;
+        align-items: baseline;
+        font-size: 12.5px;
+      }
+      .readout .lbl {
+        color: var(--ink-dim);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-size: 10.5px;
+      }
+      .readout .grade-tag {
+        font-family: 'Rajdhani', sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--accent);
+        min-width: 52px;
+        display: inline-block;
+      }
+      .readout .rline {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+      }
+      .readout .rval {
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .readout .rval.wpn {
+        color: var(--green);
+      }
+      .readout .rval.gear {
+        color: var(--blue);
+      }
+      .readout .rval.skl {
+        color: var(--pink);
+      }
+
+      /* ---------- GRID OF PANELS ---------- */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      @media (max-width: 980px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .panel-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line);
+        background: var(--panel-2);
+      }
+      .panel-head svg {
+        flex-shrink: 0;
+      }
+      .panel-head .titles {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.15;
+      }
+      .panel-head .fr {
+        font-family: 'Rajdhani', sans-serif;
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: 0.04em;
+        color: #f2f5f3;
+        text-transform: uppercase;
+      }
+      .panel-head .en {
+        font-size: 10px;
+        color: var(--ink-dim);
+        letter-spacing: 0.14em;
+      }
+
+      .table-scroll {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+      }
+      thead th {
+        font-weight: 500;
+        text-align: right;
+        padding: 8px 8px 6px;
+        border-bottom: 1px solid var(--line);
+        white-space: nowrap;
+        font-size: 10px;
+        letter-spacing: 0.03em;
+      }
+      thead th.grade-col {
+        text-align: left;
+        color: var(--ink-dim);
+      }
+      thead .mat-name {
+        display: block;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        height: 92px;
+        font-weight: 600;
+      }
+      thead .icon-row td,
+      thead .icon-row th {
+        padding-top: 0;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--line-soft);
+      }
+
+      tbody td {
+        padding: 5px 8px;
+        text-align: right;
+        border-bottom: 1px solid var(--line-soft);
+        white-space: nowrap;
+      }
+      tbody td.grade-col {
+        text-align: left;
+        color: var(--ink-dim);
+        font-weight: 500;
+      }
+      tbody td.empty {
+        color: #2a3230;
+      }
+
+      tbody tr {
+        transition: background-color 0.12s ease;
+      }
+      tbody tr.hot {
+        background: rgba(255, 122, 26, 0.08);
+      }
+      tbody tr.hot td.grade-col {
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      tr.total-row td {
+        border-top: 2px solid var(--line);
+        border-bottom: none;
+        font-weight: 700;
+        color: #f2f5f3;
+        padding-top: 9px;
+        background: var(--panel-2);
+      }
+      tr.total-row td.grade-col {
+        color: var(--accent);
+        letter-spacing: 0.05em;
+      }
+
+      .c-green {
+        color: var(--green);
+      }
+      .c-blue {
+        color: var(--blue);
+      }
+      .c-ink {
+        color: var(--ink);
+      }
+      .c-orange {
+        color: var(--orange);
+      }
+      .c-red {
+        color: var(--red);
+      }
+      .c-pink {
+        color: var(--pink);
+      }
+
+      footer {
+        margin-top: 26px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 11px;
+        color: var(--ink-dim);
+        letter-spacing: 0.03em;
+      }
+      footer a {
+        color: var(--ink-dim);
+        text-decoration: none;
+        border-bottom: 1px dotted var(--line);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="eyebrow">
+          <span class="dot pulse"></span>ISAC // BASE DE DONNÉES DE CRAFT
+        </div>
+        <h1>
+          Coûts des améliorations d'expertise
+          <span>// Expertise Upgrade Costs</span>
+        </h1>
+        <div class="sub">
+          Palier <b>+1%</b> à <b>+30%</b> · Patch <b>Y7S1</b> · Passe la souris
+          sur une ligne pour comparer le coût du même palier entre armes,
+          équipement et compétences.
+        </div>
+
+        <div class="readout" id="readout">
+          <div>
+            <span class="lbl">Palier</span><br /><span
+              class="grade-tag"
+              id="ro-grade"
+              >—</span
+            >
+          </div>
+          <div class="rline">
+            <span class="lbl">Armes</span
+            ><span class="rval wpn" id="ro-wpn">—</span>
+          </div>
+          <div class="rline">
+            <span class="lbl">Équipement</span
+            ><span class="rval gear" id="ro-gear">—</span>
+          </div>
+          <div class="rline">
+            <span class="lbl">Compétences</span
+            ><span class="rval skl" id="ro-skl">—</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="grid" id="grid"></div>
+
+      <footer>
+        <span>tekgeek-dev.fr // ISAC terminal reference build</span>
+      </footer>
+    </div>
+
+    <script>
+      /* ---------------- ICONS (abstract line marks, not game assets) ---------------- */
+      const ICONS = {
+        weapon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff7a1a" stroke-width="1.6"><path d="M3 15h9l2-3h6l1 2-1 2h-2v3h-3v-3H8l-2 3H3z"/><path d="M12 12v-3"/></svg>`,
+        gear: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff7a1a" stroke-width="1.6"><rect x="6" y="7" width="12" height="14" rx="2"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/><path d="M9 12h6"/></svg>`,
+        skill: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff7a1a" stroke-width="1.6"><path d="M12 2l7 4v8l-7 4-7-4V6z"/><circle cx="12" cy="10" r="2.4"/></svg>`,
+      };
+
+      /* ---------------- SHARED RESOURCE-TIER COLUMNS (identical across all 3 categories) ---------------- */
+      const nulls = (n) => Array(n).fill(null);
+
+      const SHD_CAL = [
+        ...nulls(12),
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        7,
+        8,
+        8,
+        9,
+        9,
+      ];
+      const FIELD_RECON = [
+        ...nulls(7),
+        1,
+        2,
+        3,
+        3,
+        4,
+        5,
+        5,
+        6,
+        7,
+        7,
+        8,
+        9,
+        10,
+        10,
+        11,
+        12,
+        12,
+        13,
+        14,
+        14,
+        15,
+        16,
+        17,
+      ];
+      const EXOTIC = [
+        ...nulls(12),
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        7,
+        8,
+        8,
+        9,
+        9,
+      ];
+
+      function buildTiers(t1, t2, t3) {
+        return {
+          tier1: [...t1, ...nulls(30 - t1.length)],
+          tier2: [...t2, ...nulls(30 - t2.length)],
+          tier3: [...t3, ...nulls(30 - t3.length)],
+          shd: SHD_CAL,
+          field: FIELD_RECON,
+          exotic: EXOTIC,
+        };
+      }
+
+      /* ---------------- PANEL DEFINITIONS ---------------- */
+      const PANELS = [
+        {
+          id: 'weapons',
+          fr: 'Armes',
+          en: 'WEAPONS',
+          icon: ICONS.weapon,
+          roKey: 'wpn',
+          cols: [
+            { key: 'tier1', name: 'Steel', cls: 'c-green' },
+            { key: 'tier2', name: 'Titanium', cls: 'c-blue' },
+            { key: 'tier3', name: 'Receiver Components', cls: 'c-ink' },
+            { key: 'shd', name: 'SHD Calibration', cls: 'c-orange' },
+            { key: 'field', name: 'Field Recon Data', cls: 'c-red' },
+            { key: 'exotic', name: 'Exotic Components', cls: 'c-pink' },
+          ],
+          data: buildTiers(
+            [122, 138, 154, 170, 186],
+            [76, 88, 100, 112, 124, 136, 148, 160, 172, 184],
+            [130, 150, 170, 190, 210, 230, 250, 270, 290, 310],
+          ),
+        },
+        {
+          id: 'gear',
+          fr: 'Équipement',
+          en: 'GEAR',
+          icon: ICONS.gear,
+          roKey: 'gear',
+          cols: [
+            { key: 'tier1', name: 'Polycarbonate', cls: 'c-green' },
+            { key: 'tier2', name: 'Carbon Fiber', cls: 'c-blue' },
+            { key: 'tier3', name: 'Protective Fabric', cls: 'c-ink' },
+            { key: 'shd', name: 'SHD Calibration', cls: 'c-orange' },
+            { key: 'field', name: 'Field Recon Data', cls: 'c-red' },
+            { key: 'exotic', name: 'Exotic Components', cls: 'c-pink' },
+          ],
+          data: buildTiers(
+            [61, 69, 77, 85, 93],
+            [40, 46, 52, 58, 64, 70, 76, 82, 88, 94],
+            [65, 75, 85, 95, 105, 115, 125, 135, 145, 155],
+          ),
+        },
+        {
+          id: 'skills',
+          fr: 'Compétences',
+          en: 'SKILLS',
+          icon: ICONS.skill,
+          roKey: 'skl',
+          cols: [
+            { key: 'tier1', name: 'Ceramic', cls: 'c-green' },
+            { key: 'tier2', name: 'Electronics', cls: 'c-blue' },
+            { key: 'tier3', name: 'Printer Filament', cls: 'c-ink' },
+            { key: 'shd', name: 'SHD Calibration', cls: 'c-orange' },
+            { key: 'field', name: 'Field Recon Data', cls: 'c-red' },
+            { key: 'exotic', name: 'Exotic Components', cls: 'c-pink' },
+          ],
+          data: buildTiers(
+            [122, 138, 154, 170, 186],
+            [76, 88, 100, 112, 124, 136, 148, 160, 172, 184],
+            [130, 150, 170, 190, 210, 230, 250, 270, 290, 310],
+          ),
+        },
+      ];
+
+      /* ---------------- RENDER ---------------- */
+      const grid = document.getElementById('grid');
+
+      function fmt(v) {
+        return v === null ? '' : v;
+      }
+
+      PANELS.forEach((panel) => {
+        const totals = {};
+        panel.cols.forEach((c) => {
+          totals[c.key] = panel.data[c.key].reduce((s, v) => s + (v || 0), 0);
+        });
+
+        const panelEl = document.createElement('div');
+        panelEl.className = 'panel';
+
+        const headHtml = `
+    <div class="panel-head">
+      ${panel.icon}
+      <div class="titles">
+        <span class="fr">${panel.fr}</span>
+        <span class="en">${panel.en}</span>
+      </div>
+    </div>`;
+
+        let theadCols = panel.cols
+          .map(
+            (c) =>
+              `<th class="${c.cls}"><span class="mat-name">${c.name}</span></th>`,
+          )
+          .join('');
+
+        let bodyRows = '';
+        for (let i = 0; i < 30; i++) {
+          const grade = i + 1;
+          let cells = panel.cols
+            .map((c) => {
+              const v = panel.data[c.key][i];
+              return v === null
+                ? `<td class="empty">·</td>`
+                : `<td class="${c.cls}">${v}</td>`;
+            })
+            .join('');
+          bodyRows += `<tr data-grade="${grade}"><td class="grade-col">+${grade}%</td>${cells}</tr>`;
+        }
+
+        let totalRow =
+          `<tr class="total-row"><td class="grade-col">TOTAL</td>` +
+          panel.cols
+            .map((c) => `<td class="${c.cls}">${totals[c.key]}</td>`)
+            .join('') +
+          `</tr>`;
+
+        panelEl.innerHTML = `
+    ${headHtml}
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr class="icon-row">
+            <th class="grade-col">GRADE</th>
+            ${theadCols}
+          </tr>
+        </thead>
+        <tbody>
+          ${bodyRows}
+          ${totalRow}
+        </tbody>
+      </table>
+    </div>
+  `;
+
+        grid.appendChild(panelEl);
+      });
+
+      /* ---------------- CROSS-PANEL ROW SYNC + READOUT ---------------- */
+      const allRows = () => document.querySelectorAll('tbody tr[data-grade]');
+      const roGrade = document.getElementById('ro-grade');
+      const roVals = {
+        wpn: document.getElementById('ro-wpn'),
+        gear: document.getElementById('ro-gear'),
+        skl: document.getElementById('ro-skl'),
+      };
+
+      function rowTotal(panel, grade) {
+        return panel.cols.reduce(
+          (s, c) => s + (panel.data[c.key][grade - 1] || 0),
+          0,
+        );
+      }
+
+      allRows().forEach((row) => {
+        row.addEventListener('mouseenter', () => {
+          const g = row.getAttribute('data-grade');
+          allRows().forEach((r) =>
+            r.classList.toggle('hot', r.getAttribute('data-grade') === g),
+          );
+          roGrade.textContent = '+' + g + '%';
+          PANELS.forEach((panel) => {
+            const total = rowTotal(panel, parseInt(g, 10));
+            roVals[panel.roKey].textContent = total;
+          });
+        });
+        row.addEventListener('mouseleave', () => {
+          allRows().forEach((r) => r.classList.remove('hot'));
+          roGrade.textContent = '—';
+          Object.values(roVals).forEach((el) => (el.textContent = '—'));
+        });
+      });
+    </script>
+  </body>
+</html>

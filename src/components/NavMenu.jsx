@@ -4,6 +4,7 @@ const LINKS = [
   { route: 'status', href: '#/', labelKey: 'nav.status' },
   { route: 'augments', href: '#/augments', labelKey: 'nav.augments' },
   { route: 'damage', href: '#/damage', labelKey: 'nav.damage' },
+  { route: 'expertise', href: '#/expertise', labelKey: 'nav.expertise' },
 ];
 
 export function NavMenu({ route }) {

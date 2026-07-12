@@ -3,11 +3,13 @@ import { NavMenu } from './components/NavMenu';
 import { StatusPage } from './pages/StatusPage';
 import { AugmentsPage } from './pages/AugmentsPage';
 import { DamagePage } from './pages/DamagePage';
+import { ExpertisePage } from './pages/ExpertisePage';
 
 const PAGES = {
   status: StatusPage,
   augments: AugmentsPage,
   damage: DamagePage,
+  expertise: ExpertisePage,
 };
 
 export default function App() {
@@ -31,7 +33,8 @@ export default function App() {
         }}
       />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 py-10">
+      {/* max-w-4xl (896px) élargi de 100px pour la lisibilité des tables */}
+      <div className="relative z-10 max-w-[996px] mx-auto px-4 py-10">
         <NavMenu route={route} />
         <Page />
       </div>

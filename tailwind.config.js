@@ -15,12 +15,22 @@ export default {
           red: '#c0392b',
           green: '#27ae60',
           yellow: '#f39c12',
+          blue: '#4fa8ea',
+          purple: '#9d6ff2',
           text: '#c8d8e8',
           muted: '#5a7a96',
         },
       },
       fontFamily: {
         mono: ['JetBrains Mono', 'Consolas', 'monospace'],
+      },
+      // Rajdhani est très condensée : plancher global à 0.065rem, aucun
+      // texte du site ne doit descendre en dessous (cf. body dans index.css)
+      letterSpacing: {
+        normal: '0.065rem',
+        wide: '0.065rem',
+        wider: '0.09rem',
+        widest: '0.12rem',
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
