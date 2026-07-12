@@ -1,7 +1,10 @@
-// Coûts d'amélioration d'expertise par niveau, matrice patch Y7S1 (relevé
-// communautaire Reddit, cap 30).
+// Coûts d'amélioration d'expertise par niveau (relevé communautaire
+// juillet 2026, cap 30). Chaque colonne est validée par la ligne TOTAL de la
+// matrice source : armes 610/1030/1754, équipement 305/535/875, compétences
+// 770/1300/2200 ; spéciales 76/166/45 (armes, équipement) et 90/204/45
+// (compétences).
 // Matériaux de base jusqu'au niveau 10 ; données de reconnaissance à partir
-// du niveau 8 ; calibrage SHD et composants exotiques à partir du niveau 13.
+// du niveau 8 ; calibrage SHD dès le 13 ; composants exotiques dès le 14.
 export const EXPERTISE_MAX_LEVEL = 30;
 
 export const ITEM_TYPES = ['weapon', 'gear', 'skill'];
@@ -22,57 +25,82 @@ export const MATERIALS = [
   'exoticComponents',
 ];
 
-// Niveaux 11 à 30, identiques pour les trois types d'objets
-const HIGH_LEVELS = [
+// Niveaux 11 à 30 : identiques pour armes et équipement
+const WEAPON_GEAR_HIGH = [
   /* 11 */ { fieldReconData: 3 },
   /* 12 */ { fieldReconData: 4 },
-  /* 13 */ { shdCalibration: 1, fieldReconData: 5, exoticComponents: 1 },
+  /* 13 */ { shdCalibration: 1, fieldReconData: 4 },
   /* 14 */ { shdCalibration: 1, fieldReconData: 5, exoticComponents: 1 },
-  /* 15 */ { shdCalibration: 2, fieldReconData: 6, exoticComponents: 2 },
-  /* 16 */ { shdCalibration: 2, fieldReconData: 7, exoticComponents: 2 },
-  /* 17 */ { shdCalibration: 3, fieldReconData: 7, exoticComponents: 3 },
-  /* 18 */ { shdCalibration: 3, fieldReconData: 8, exoticComponents: 3 },
-  /* 19 */ { shdCalibration: 4, fieldReconData: 9, exoticComponents: 4 },
-  /* 20 */ { shdCalibration: 4, fieldReconData: 10, exoticComponents: 4 },
-  /* 21 */ { shdCalibration: 5, fieldReconData: 10, exoticComponents: 5 },
-  /* 22 */ { shdCalibration: 5, fieldReconData: 11, exoticComponents: 5 },
-  /* 23 */ { shdCalibration: 6, fieldReconData: 12, exoticComponents: 6 },
-  /* 24 */ { shdCalibration: 6, fieldReconData: 12, exoticComponents: 6 },
-  /* 25 */ { shdCalibration: 7, fieldReconData: 13, exoticComponents: 7 },
-  /* 26 */ { shdCalibration: 7, fieldReconData: 14, exoticComponents: 7 },
-  /* 27 */ { shdCalibration: 8, fieldReconData: 14, exoticComponents: 8 },
-  /* 28 */ { shdCalibration: 8, fieldReconData: 15, exoticComponents: 8 },
-  /* 29 */ { shdCalibration: 9, fieldReconData: 16, exoticComponents: 9 },
-  /* 30 */ { shdCalibration: 9, fieldReconData: 17, exoticComponents: 9 },
+  /* 15 */ { shdCalibration: 2, fieldReconData: 5, exoticComponents: 1 },
+  /* 16 */ { shdCalibration: 2, fieldReconData: 6, exoticComponents: 1 },
+  /* 17 */ { shdCalibration: 2, fieldReconData: 6, exoticComponents: 1 },
+  /* 18 */ { shdCalibration: 3, fieldReconData: 7, exoticComponents: 2 },
+  /* 19 */ { shdCalibration: 3, fieldReconData: 7, exoticComponents: 2 },
+  /* 20 */ { shdCalibration: 4, fieldReconData: 8, exoticComponents: 2 },
+  /* 21 */ { shdCalibration: 4, fieldReconData: 8, exoticComponents: 2 },
+  /* 22 */ { shdCalibration: 4, fieldReconData: 9, exoticComponents: 3 },
+  /* 23 */ { shdCalibration: 5, fieldReconData: 9, exoticComponents: 3 },
+  /* 24 */ { shdCalibration: 5, fieldReconData: 10, exoticComponents: 3 },
+  /* 25 */ { shdCalibration: 6, fieldReconData: 10, exoticComponents: 3 },
+  /* 26 */ { shdCalibration: 6, fieldReconData: 11, exoticComponents: 4 },
+  /* 27 */ { shdCalibration: 6, fieldReconData: 11, exoticComponents: 4 },
+  /* 28 */ { shdCalibration: 7, fieldReconData: 12, exoticComponents: 4 },
+  /* 29 */ { shdCalibration: 7, fieldReconData: 12, exoticComponents: 4 },
+  /* 30 */ { shdCalibration: 8, fieldReconData: 13, exoticComponents: 5 },
+];
+
+// Niveaux 11 à 30 des compétences : calibrage et reconnaissance plus chers
+// que armes/équipement, exotiques identiques
+const SKILL_HIGH = [
+  /* 11 */ { fieldReconData: 3 },
+  /* 12 */ { fieldReconData: 4 },
+  /* 13 */ { shdCalibration: 1, fieldReconData: 5 },
+  /* 14 */ { shdCalibration: 1, fieldReconData: 5, exoticComponents: 1 },
+  /* 15 */ { shdCalibration: 2, fieldReconData: 6, exoticComponents: 1 },
+  /* 16 */ { shdCalibration: 2, fieldReconData: 7, exoticComponents: 1 },
+  /* 17 */ { shdCalibration: 3, fieldReconData: 7, exoticComponents: 1 },
+  /* 18 */ { shdCalibration: 3, fieldReconData: 8, exoticComponents: 2 },
+  /* 19 */ { shdCalibration: 4, fieldReconData: 9, exoticComponents: 2 },
+  /* 20 */ { shdCalibration: 4, fieldReconData: 10, exoticComponents: 2 },
+  /* 21 */ { shdCalibration: 5, fieldReconData: 10, exoticComponents: 2 },
+  /* 22 */ { shdCalibration: 5, fieldReconData: 11, exoticComponents: 3 },
+  /* 23 */ { shdCalibration: 6, fieldReconData: 12, exoticComponents: 3 },
+  /* 24 */ { shdCalibration: 6, fieldReconData: 12, exoticComponents: 3 },
+  /* 25 */ { shdCalibration: 7, fieldReconData: 13, exoticComponents: 3 },
+  /* 26 */ { shdCalibration: 7, fieldReconData: 14, exoticComponents: 4 },
+  /* 27 */ { shdCalibration: 8, fieldReconData: 14, exoticComponents: 4 },
+  /* 28 */ { shdCalibration: 8, fieldReconData: 15, exoticComponents: 4 },
+  /* 29 */ { shdCalibration: 9, fieldReconData: 16, exoticComponents: 4 },
+  /* 30 */ { shdCalibration: 9, fieldReconData: 17, exoticComponents: 5 },
 ];
 
 // COSTS[type][niveau - 1] = coût pour atteindre ce niveau depuis le précédent
 export const COSTS = {
   weapon: [
-    { steel: 122, titanium: 76, receiverComponents: 130 },
-    { steel: 138, titanium: 88, receiverComponents: 150 },
-    { steel: 154, titanium: 100, receiverComponents: 170 },
-    { steel: 170, titanium: 112, receiverComponents: 190 },
-    { steel: 186, titanium: 124, receiverComponents: 210 },
-    { titanium: 136, receiverComponents: 230 },
-    { titanium: 148, receiverComponents: 250 },
-    { titanium: 160, receiverComponents: 270, fieldReconData: 1 },
-    { titanium: 172, receiverComponents: 290, fieldReconData: 2 },
-    { titanium: 184, receiverComponents: 310, fieldReconData: 3 },
-    ...HIGH_LEVELS,
+    { steel: 38, titanium: 45, receiverComponents: 76 },
+    { steel: 68, titanium: 52, receiverComponents: 90 },
+    { steel: 110, titanium: 61, receiverComponents: 106 },
+    { steel: 164, titanium: 72, receiverComponents: 125 },
+    { steel: 230, titanium: 85, receiverComponents: 147 },
+    { titanium: 105, receiverComponents: 162 },
+    { titanium: 122, receiverComponents: 198 },
+    { titanium: 141, receiverComponents: 238, fieldReconData: 1 },
+    { titanium: 162, receiverComponents: 282, fieldReconData: 2 },
+    { titanium: 185, receiverComponents: 330, fieldReconData: 3 },
+    ...WEAPON_GEAR_HIGH,
   ],
   gear: [
-    { polycarbonate: 61, carbonFiber: 40, protectiveFabric: 65 },
-    { polycarbonate: 69, carbonFiber: 46, protectiveFabric: 75 },
-    { polycarbonate: 77, carbonFiber: 52, protectiveFabric: 85 },
-    { polycarbonate: 85, carbonFiber: 58, protectiveFabric: 95 },
-    { polycarbonate: 93, carbonFiber: 64, protectiveFabric: 105 },
-    { carbonFiber: 70, protectiveFabric: 115 },
-    { carbonFiber: 76, protectiveFabric: 125 },
-    { carbonFiber: 82, protectiveFabric: 135, fieldReconData: 1 },
-    { carbonFiber: 88, protectiveFabric: 145, fieldReconData: 2 },
-    { carbonFiber: 94, protectiveFabric: 155, fieldReconData: 3 },
-    ...HIGH_LEVELS,
+    { polycarbonate: 47, carbonFiber: 35, protectiveFabric: 49 },
+    { polycarbonate: 54, carbonFiber: 38, protectiveFabric: 58 },
+    { polycarbonate: 61, carbonFiber: 41, protectiveFabric: 67 },
+    { polycarbonate: 68, carbonFiber: 44, protectiveFabric: 76 },
+    { polycarbonate: 75, carbonFiber: 47, protectiveFabric: 85 },
+    { carbonFiber: 58, protectiveFabric: 92 },
+    { carbonFiber: 62, protectiveFabric: 100 },
+    { carbonFiber: 66, protectiveFabric: 108, fieldReconData: 1 },
+    { carbonFiber: 70, protectiveFabric: 116, fieldReconData: 2 },
+    { carbonFiber: 74, protectiveFabric: 124, fieldReconData: 3 },
+    ...WEAPON_GEAR_HIGH,
   ],
   skill: [
     { ceramic: 122, electronics: 76, printerFilament: 130 },
@@ -85,6 +113,6 @@ export const COSTS = {
     { electronics: 160, printerFilament: 270, fieldReconData: 1 },
     { electronics: 172, printerFilament: 290, fieldReconData: 2 },
     { electronics: 184, printerFilament: 310, fieldReconData: 3 },
-    ...HIGH_LEVELS,
+    ...SKILL_HIGH,
   ],
 };
