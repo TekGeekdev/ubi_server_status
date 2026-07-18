@@ -43,7 +43,7 @@ function NewsCard({ article }) {
 						</>
 					)}
 				</div>
-				<h3 className="text-white text-sm font-bold leading-snug mb-1.5 group-hover:text-div2-orange transition-colors line-clamp-2">
+				<h3 className="text-div2-heading text-sm font-bold leading-snug mb-1.5 group-hover:text-div2-orange transition-colors line-clamp-2">
 					{article.title}
 				</h3>
 				{article.abstract && (

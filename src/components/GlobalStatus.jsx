@@ -17,10 +17,10 @@ export function GlobalStatus({ platforms }) {
   return (
     <div className={`
       relative overflow-hidden corner-cut border px-6 py-4 flex items-center gap-4
-      ${worst === 'online' ? 'border-green-400/20 bg-green-400/5' : ''}
-      ${worst === 'maintenance' ? 'border-yellow-400/20 bg-yellow-400/5' : ''}
-      ${worst === 'degradation' ? 'border-orange-400/20 bg-orange-400/5' : ''}
-      ${worst === 'interrupted' ? 'border-red-400/20 bg-red-400/5' : ''}
+      ${worst === 'online' ? 'border-div2-green/20 bg-div2-green/5' : ''}
+      ${worst === 'maintenance' ? 'border-div2-yellow/20 bg-div2-yellow/5' : ''}
+      ${worst === 'degradation' ? 'border-div2-orange/20 bg-div2-orange/5' : ''}
+      ${worst === 'interrupted' ? 'border-div2-red/20 bg-div2-red/5' : ''}
     `}>
       {/* Animated dot */}
       <div className="relative shrink-0">

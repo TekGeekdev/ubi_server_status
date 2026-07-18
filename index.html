@@ -5,6 +5,16 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Division 2 — Server Status</title>
+    <script>
+      // Applique le thème avant le premier rendu pour éviter le flash sombre
+      try {
+        var theme = localStorage.getItem('div2-theme');
+        var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (theme === 'light' || (theme !== 'dark' && prefersLight)) {
+          document.documentElement.classList.add('light');
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

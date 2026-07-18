@@ -28,7 +28,7 @@ export function CountdownTimer({ countdown, total, onRefresh, loading, paused, o
             <circle
               cx="24" cy="24" r={RADIUS}
               fill="none"
-              stroke="rgba(30,46,66,1)"
+              stroke="rgb(var(--div2-border))"
               strokeWidth="3"
             />
             <circle
@@ -89,7 +89,7 @@ export function CountdownTimer({ countdown, total, onRefresh, loading, paused, o
           w-full flex items-center justify-center gap-2 px-4 py-1.5 rounded
           bg-div2-surface border transition-all duration-200 cursor-pointer text-xs
           ${paused
-            ? 'border-green-500/40 text-green-400 hover:border-green-500/60 hover:bg-green-500/10'
+            ? 'border-div2-green/40 text-div2-green hover:border-div2-green/60 hover:bg-div2-green/10'
             : 'border-div2-border text-div2-muted hover:border-div2-orange/40 hover:text-div2-orange'
           }
         `}

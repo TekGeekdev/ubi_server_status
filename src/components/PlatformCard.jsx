@@ -28,17 +28,17 @@ function XboxIcon() {
 const PLATFORM_ICONS = { pc: PcIcon, ps4: Ps4Icon, xbox: XboxIcon };
 
 const STATUS_BORDER = {
-  online: 'border-green-400/20',
-  maintenance: 'border-yellow-400/30',
-  degradation: 'border-orange-400/30',
-  interrupted: 'border-red-400/30',
+  online: 'border-div2-green/20',
+  maintenance: 'border-div2-yellow/30',
+  degradation: 'border-div2-orange/30',
+  interrupted: 'border-div2-red/30',
 };
 
 const STATUS_GLOW = {
   online: '',
-  maintenance: 'shadow-[0_0_30px_rgba(250,204,21,0.06)]',
-  degradation: 'shadow-[0_0_30px_rgba(251,146,60,0.08)]',
-  interrupted: 'shadow-[0_0_30px_rgba(248,113,113,0.1)]',
+  maintenance: 'shadow-[0_0_30px_rgb(var(--div2-yellow)/0.06)]',
+  degradation: 'shadow-[0_0_30px_rgb(var(--div2-orange)/0.08)]',
+  interrupted: 'shadow-[0_0_30px_rgb(var(--div2-red)/0.1)]',
 };
 
 const DEFAULT_SERVICE_KEYS = ['services.servers', 'services.shop', 'services.matchmaking', 'services.auth'];
@@ -72,7 +72,7 @@ export function PlatformCard({ platform }) {
           <span className={`${cfg.color} opacity-80`}><Icon /></span>
           <div>
             <p className="text-div2-muted text-xs uppercase tracking-widest mb-0.5">{t('platform.title')}</p>
-            <h2 className="text-white text-xl font-bold tracking-wide">
+            <h2 className="text-div2-heading text-xl font-bold tracking-wide">
               {name}
             </h2>
           </div>
@@ -82,7 +82,7 @@ export function PlatformCard({ platform }) {
 
       {/* Maintenance notice */}
       {isMaintenance && (
-        <div className="flex items-center gap-2 text-yellow-400/80 text-xs bg-yellow-400/5 border border-yellow-400/20 rounded px-3 py-2">
+        <div className="flex items-center gap-2 text-div2-yellow/80 text-xs bg-div2-yellow/5 border border-div2-yellow/20 rounded px-3 py-2">
           <svg className="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

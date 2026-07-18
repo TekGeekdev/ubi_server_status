@@ -1,4 +1,5 @@
 import { useTranslation } from '../i18n/LanguageContext';
+import { useTheme } from '../hooks/useTheme';
 
 const LINKS = [
   { route: 'status', href: '#/', labelKey: 'nav.status' },
@@ -9,6 +10,8 @@ const LINKS = [
 
 export function NavMenu({ route }) {
   const { t } = useTranslation();
+  const { theme, toggleTheme } = useTheme();
+  const themeLabel = theme === 'light' ? t('theme.night') : t('theme.day');
 
   return (
     <nav className="mb-8 flex items-center gap-2 border-b border-div2-border pb-4">
@@ -32,6 +35,15 @@ export function NavMenu({ route }) {
           </a>
         );
       })}
+      <button
+        type="button"
+        onClick={toggleTheme}
+        aria-label={themeLabel}
+        title={themeLabel}
+        className="clip-panel-sm ml-auto w-8 h-8 flex items-center justify-center text-sm border bg-div2-surface-raised border-div2-border text-div2-muted hover:text-div2-orange hover:border-div2-muted transition-all duration-150"
+      >
+        {theme === 'light' ? '☾' : '☀'}
+      </button>
     </nav>
   );
 }

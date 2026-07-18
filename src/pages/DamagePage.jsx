@@ -100,7 +100,7 @@ export function DamagePage() {
             ISAC // Terminal Agent
           </p>
           <h1
-            className="text-white text-3xl sm:text-4xl font-bold uppercase tracking-wide leading-tight mt-1.5"
+            className="text-div2-heading text-3xl sm:text-4xl font-bold uppercase tracking-wide leading-tight mt-1.5"
           >
             {t('damage.titlePrefix')}{' '}
             <span className="text-div2-orange">{t('damage.titleAccent')}</span>

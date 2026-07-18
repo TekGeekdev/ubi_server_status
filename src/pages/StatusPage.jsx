@@ -31,7 +31,7 @@ export function StatusPage() {
               <div>
                 <p className="text-div2-muted text-xs uppercase tracking-[0.3em]">Tom Clancy's</p>
                 <h1
-                  className="text-white text-3xl font-bold tracking-wider uppercase"
+                  className="text-div2-heading text-3xl font-bold tracking-wider uppercase"
                 >
                   The Division 2
                 </h1>
@@ -63,8 +63,8 @@ export function StatusPage() {
             {t('header.lastUpdated')} : {formatTime(lastFetch, locale)}
           </span>
           {data && (
-            <span className={`flex items-center gap-1.5 ${isLive ? 'text-green-400/60' : 'text-yellow-400/60'}`}>
-              <span className={`w-1.5 h-1.5 rounded-full ${isLive ? 'bg-green-400' : 'bg-yellow-400'}`} />
+            <span className={`flex items-center gap-1.5 ${isLive ? 'text-div2-green/60' : 'text-div2-yellow/60'}`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${isLive ? 'bg-div2-green' : 'bg-div2-yellow'}`} />
               {isLive ? t('header.liveData') : t('header.fallbackData')}
             </span>
           )}
@@ -124,10 +124,10 @@ export function StatusPage() {
 
 function LegendItem({ status, label }) {
   const DOTS = {
-    online: 'bg-green-400',
-    maintenance: 'bg-yellow-400',
-    degradation: 'bg-orange-400',
-    interrupted: 'bg-red-400',
+    online: 'bg-div2-green',
+    maintenance: 'bg-div2-yellow',
+    degradation: 'bg-div2-orange',
+    interrupted: 'bg-div2-red',
   };
   return (
     <div className="flex items-center gap-2 text-div2-text text-sm">

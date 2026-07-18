@@ -3,9 +3,48 @@
 @tailwind utilities;
 
 @layer base {
+  /* Palette en variables RGB (canaux séparés pour les modificateurs
+     d'opacité Tailwind). Mode sombre par défaut, mode jour via .light */
+  :root {
+    --div2-bg: 7 12 19;
+    --div2-surface: 14 22 32;
+    --div2-surface-raised: 21 34 50;
+    --div2-border: 30 46 66;
+    --div2-orange: 232 128 10;
+    --div2-orange-light: 245 158 46;
+    --div2-orange-dark: 179 94 4;
+    --div2-red: 192 57 43;
+    --div2-green: 39 174 96;
+    --div2-yellow: 243 156 18;
+    --div2-blue: 79 168 234;
+    --div2-purple: 157 111 242;
+    --div2-text: 200 216 232;
+    --div2-muted: 90 122 150;
+    --div2-heading: 255 255 255;
+  }
+
+  /* Mode jour : accents assombris pour garder le contraste sur fond clair */
+  :root.light {
+    --div2-bg: 240 244 248;
+    --div2-surface: 255 255 255;
+    --div2-surface-raised: 226 233 240;
+    --div2-border: 188 202 216;
+    --div2-orange: 198 106 6;
+    --div2-orange-light: 232 128 10;
+    --div2-orange-dark: 154 80 3;
+    --div2-red: 176 44 32;
+    --div2-green: 14 87 46;
+    --div2-yellow: 178 116 8;
+    --div2-blue: 32 112 176;
+    --div2-purple: 122 80 210;
+    --div2-text: 42 58 74;
+    --div2-muted: 84 110 134;
+    --div2-heading: 12 26 40;
+  }
+
   body {
-    background-color: #070c13;
-    color: #c8d8e8;
+    background-color: rgb(var(--div2-bg));
+    color: rgb(var(--div2-text));
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
@@ -18,10 +57,10 @@
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #0e1620;
+    background: rgb(var(--div2-surface));
   }
   ::-webkit-scrollbar-thumb {
-    background: #1e2e42;
+    background: rgb(var(--div2-border));
     border-radius: 3px;
   }
 }

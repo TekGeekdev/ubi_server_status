@@ -3,22 +3,24 @@ export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      // Valeurs définies en variables CSS dans index.css (mode jour/nuit)
       colors: {
         div2: {
-          bg: '#070c13',
-          surface: '#0e1620',
-          'surface-raised': '#152232',
-          border: '#1e2e42',
-          orange: '#e8800a',
-          'orange-light': '#f59e2e',
-          'orange-dark': '#b35e04',
-          red: '#c0392b',
-          green: '#27ae60',
-          yellow: '#f39c12',
-          blue: '#4fa8ea',
-          purple: '#9d6ff2',
-          text: '#c8d8e8',
-          muted: '#5a7a96',
+          bg: 'rgb(var(--div2-bg) / <alpha-value>)',
+          surface: 'rgb(var(--div2-surface) / <alpha-value>)',
+          'surface-raised': 'rgb(var(--div2-surface-raised) / <alpha-value>)',
+          border: 'rgb(var(--div2-border) / <alpha-value>)',
+          orange: 'rgb(var(--div2-orange) / <alpha-value>)',
+          'orange-light': 'rgb(var(--div2-orange-light) / <alpha-value>)',
+          'orange-dark': 'rgb(var(--div2-orange-dark) / <alpha-value>)',
+          red: 'rgb(var(--div2-red) / <alpha-value>)',
+          green: 'rgb(var(--div2-green) / <alpha-value>)',
+          yellow: 'rgb(var(--div2-yellow) / <alpha-value>)',
+          blue: 'rgb(var(--div2-blue) / <alpha-value>)',
+          purple: 'rgb(var(--div2-purple) / <alpha-value>)',
+          text: 'rgb(var(--div2-text) / <alpha-value>)',
+          muted: 'rgb(var(--div2-muted) / <alpha-value>)',
+          heading: 'rgb(var(--div2-heading) / <alpha-value>)',
         },
       },
       fontFamily: {
