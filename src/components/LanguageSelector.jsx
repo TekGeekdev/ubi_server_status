@@ -63,7 +63,7 @@ export function LanguageSelector() {
 					/>
 				</svg>
 				<div className="text-left">
-					<p className="text-div2-muted text-[10px] font-mono uppercase tracking-widest leading-none mb-0.5">
+					<p className="text-div2-muted text-[10px] uppercase tracking-widest leading-none mb-0.5">
 						{t('language.selector')}
 					</p>
 					<p className="text-div2-text text-sm font-semibold leading-none">
@@ -111,7 +111,7 @@ export function LanguageSelector() {
 								>
 									<span className="flex flex-col">
 										<span className="font-semibold">{l.nativeLabel}</span>
-										<span className="text-div2-muted text-xs font-mono">{l.label}</span>
+										<span className="text-div2-muted text-xs">{l.label}</span>
 									</span>
 									{selected && (
 										<svg

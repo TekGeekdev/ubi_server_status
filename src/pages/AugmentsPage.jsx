@@ -47,7 +47,7 @@ export function AugmentsPage() {
       {/* Header */}
       <header className="flex justify-between items-end flex-wrap gap-4 border-b border-div2-border pb-5 mb-8">
         <div>
-          <p className="text-div2-orange text-[11px] font-mono uppercase tracking-[0.28em]">
+          <p className="text-div2-orange text-[11px] uppercase tracking-[0.28em]">
             ISAC // Terminal Agent
           </p>
           <h1
@@ -62,7 +62,7 @@ export function AugmentsPage() {
           <div className="w-48">
             <LanguageSelector />
           </div>
-          <div className="text-right text-xs font-mono text-div2-muted border-l border-div2-border pl-4">
+          <div className="text-right text-xs text-div2-muted border-l border-div2-border pl-4">
             <div className="flex items-center justify-end gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-div2-orange shadow-[0_0_8px_rgba(232,128,10,0.5)]" />
               {t('augments.feedActive')}
@@ -80,7 +80,7 @@ export function AugmentsPage() {
               key={lvl}
               type="button"
               onClick={() => setLevel(lvl)}
-              className={`clip-panel-sm w-12 h-12 flex items-center justify-center font-mono text-sm font-bold border transition-all duration-150 ${
+              className={`clip-panel-sm w-12 h-12 flex items-center justify-center text-sm font-bold border transition-all duration-150 ${
                 lvl === level
                   ? 'bg-div2-orange border-div2-orange text-div2-bg glow-orange'
                   : 'bg-div2-surface-raised border-div2-border text-div2-muted hover:text-div2-text hover:border-div2-muted'
@@ -110,7 +110,7 @@ export function AugmentsPage() {
       {/* Table de progression */}
       <Panel title={t('augments.table.title')} hint={t('augments.table.hint')}>
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse font-mono text-[13px] min-w-[760px]">
+          <table className="w-full border-collapse text-[13px] min-w-[760px]">
             <thead>
               <tr>
                 <th className="text-left px-2.5 py-2 text-[11px] uppercase tracking-wider border-b border-div2-muted/40 whitespace-nowrap text-div2-text">
@@ -164,10 +164,10 @@ export function AugmentsPage() {
                 {t(`augments.effect.${a.name.toLowerCase()}`)}
               </p>
               <div className="flex gap-2 flex-wrap">
-                <span className="font-mono text-[11px] px-2 py-1 border border-div2-border text-div2-muted">
+                <span className="text-[11px] px-2 py-1 border border-div2-border text-div2-muted">
                   {t('augments.effects.gain', { gain: a.gain })}
                 </span>
-                <span className="font-mono text-[11px] px-2 py-1 border border-div2-orange-dark text-div2-orange">
+                <span className="text-[11px] px-2 py-1 border border-div2-orange-dark text-div2-orange">
                   {t('augments.effects.max', { value: a.values[MAX_LEVEL - 1] })}
                 </span>
               </div>
@@ -189,7 +189,7 @@ export function AugmentsPage() {
               >
                 <div className="text-sm uppercase tracking-wide text-div2-text">
                   {a.name}
-                  <span className="block font-mono text-[10px] normal-case tracking-normal text-div2-muted/60 mt-0.5">
+                  <span className="block text-[10px] normal-case tracking-normal text-div2-muted/60 mt-0.5">
                     {t('augments.build.rowMax', { value: a.values[MAX_LEVEL - 1] })}
                   </span>
                 </div>
@@ -201,7 +201,7 @@ export function AugmentsPage() {
                   >
                     −
                   </StepperButton>
-                  <span className="w-10 h-8 leading-8 text-center font-mono text-[15px] font-bold text-div2-orange bg-div2-bg border-y border-div2-border">
+                  <span className="w-10 h-8 leading-8 text-center text-[15px] font-bold text-div2-orange bg-div2-bg border-y border-div2-border">
                     {count}
                   </span>
                   <StepperButton
@@ -213,7 +213,7 @@ export function AugmentsPage() {
                   </StepperButton>
                 </div>
                 <span
-                  className={`text-right font-mono text-sm ${
+                  className={`text-right text-sm ${
                     count > 0 ? 'text-div2-orange' : 'text-div2-muted/60'
                   }`}
                 >
@@ -223,7 +223,7 @@ export function AugmentsPage() {
             );
           })}
         </div>
-        <p className="mt-4 font-mono text-xs text-div2-muted/70">
+        <p className="mt-4 text-xs text-div2-muted/70">
           {t('augments.build.capNote', { max: MAX_PIECES })}
         </p>
 
@@ -231,12 +231,12 @@ export function AugmentsPage() {
           <h3 className="text-sm font-bold uppercase tracking-widest text-div2-text">
             {t('augments.build.summaryTitle')}
           </h3>
-          <span className={`font-mono text-xs ${capReached ? 'text-div2-red' : 'text-div2-muted/70'}`}>
+          <span className={`text-xs ${capReached ? 'text-div2-red' : 'text-div2-muted/70'}`}>
             {t('augments.build.total', { count: totalPieces, max: MAX_PIECES })}
           </span>
         </div>
         {buildSummary.length === 0 ? (
-          <p className="font-mono text-xs text-div2-muted/60">{t('augments.build.empty')}</p>
+          <p className="text-xs text-div2-muted/60">{t('augments.build.empty')}</p>
         ) : (
           <div className="flex flex-col gap-2.5">
             {buildSummary.map((r, i) => (
@@ -259,10 +259,10 @@ export function AugmentsPage() {
           <CostStat value="6" label={t('augments.cost.switch')} />
           <CostStat value="31" label={t('augments.cost.upgrade')} />
         </div>
-        <p className="mt-4 font-mono text-xs text-div2-muted/70">{t('augments.cost.note')}</p>
+        <p className="mt-4 text-xs text-div2-muted/70">{t('augments.cost.note')}</p>
       </Panel>
 
-      <footer className="mt-5 pt-4 border-t border-div2-border font-mono text-[11px] text-div2-muted/60 flex justify-between flex-wrap gap-2">
+      <footer className="mt-5 pt-4 border-t border-div2-border text-[11px] text-div2-muted/60 flex justify-between flex-wrap gap-2">
         <span>{t('augments.footer.frozen')}</span>
         <span>{t('augments.footer.brand')}</span>
       </footer>
@@ -273,10 +273,10 @@ export function AugmentsPage() {
 function ReadoutRow({ rank, name, sub, ratio, value }) {
   return (
     <div className="grid grid-cols-[28px_130px_1fr_70px] max-sm:grid-cols-[20px_90px_1fr_55px] items-center gap-3 max-sm:gap-2">
-      <span className="font-mono text-xs text-div2-muted/60">{String(rank).padStart(2, '0')}</span>
+      <span className="text-xs text-div2-muted/60">{String(rank).padStart(2, '0')}</span>
       <div>
         <div className="text-[13px] uppercase tracking-wide text-div2-text">{name}</div>
-        {sub && <div className="font-mono text-[10px] text-div2-muted/60 mt-0.5">{sub}</div>}
+        {sub && <div className="text-[10px] text-div2-muted/60 mt-0.5">{sub}</div>}
       </div>
       <div className="h-2.5 bg-div2-bg border border-div2-border overflow-hidden">
         <div
@@ -284,7 +284,7 @@ function ReadoutRow({ rank, name, sub, ratio, value }) {
           style={{ width: `${(ratio * 100).toFixed(1)}%` }}
         />
       </div>
-      <span className="font-mono text-[13px] text-right text-div2-orange">{value}</span>
+      <span className="text-[13px] text-right text-div2-orange">{value}</span>
     </div>
   );
 }
@@ -296,7 +296,7 @@ function StepperButton({ onClick, disabled, label, children }) {
       onClick={onClick}
       disabled={disabled}
       aria-label={label}
-      className="w-8 h-8 flex items-center justify-center bg-div2-surface-raised border border-div2-border text-div2-muted font-mono text-base enabled:hover:text-div2-text enabled:hover:border-div2-muted disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+      className="w-8 h-8 flex items-center justify-center bg-div2-surface-raised border border-div2-border text-div2-muted text-base enabled:hover:text-div2-text enabled:hover:border-div2-muted disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
     >
       {children}
     </button>

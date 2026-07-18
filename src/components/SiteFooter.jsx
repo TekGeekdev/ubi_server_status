@@ -12,7 +12,7 @@ export function SiteFooter({ showRefreshNote = false }) {
           href="https://discord.gg/thedivisiongame"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-3 py-1.5 rounded bg-div2-surface border border-div2-border hover:border-[#5865F2]/60 hover:bg-[#5865F2]/10 text-div2-text hover:text-[#5865F2] transition-all duration-200 text-xs font-mono"
+          className="flex items-center gap-2 px-3 py-1.5 rounded bg-div2-surface border border-div2-border hover:border-[#5865F2]/60 hover:bg-[#5865F2]/10 text-div2-text hover:text-[#5865F2] transition-all duration-200 text-xs"
         >
           <DiscordIcon />
           The Division
@@ -21,17 +21,17 @@ export function SiteFooter({ showRefreshNote = false }) {
           href="https://discord.gg/ubisoftofficial"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-3 py-1.5 rounded bg-div2-surface border border-div2-border hover:border-[#5865F2]/60 hover:bg-[#5865F2]/10 text-div2-text hover:text-[#5865F2] transition-all duration-200 text-xs font-mono"
+          className="flex items-center gap-2 px-3 py-1.5 rounded bg-div2-surface border border-div2-border hover:border-[#5865F2]/60 hover:bg-[#5865F2]/10 text-div2-text hover:text-[#5865F2] transition-all duration-200 text-xs"
         >
           <DiscordIcon />
           Ubisoft
         </a>
       </div>
-      {showRefreshNote && <p className="text-div2-muted text-xs font-mono">{t('footer.text')}</p>}
-      <p className="text-div2-muted/40 text-xs font-mono text-center leading-relaxed max-w-xl">
+      {showRefreshNote && <p className="text-div2-muted text-xs">{t('footer.text')}</p>}
+      <p className="text-div2-muted/40 text-xs text-center leading-relaxed max-w-xl">
         {t('footer.legal')}
       </p>
-      <p className="text-div2-muted/50 text-xs font-mono">
+      <p className="text-div2-muted/50 text-xs">
         {t('footer.madeBy')}{' '}
         <a
           href="https://tekgeek-dev.fr/"

@@ -58,14 +58,14 @@ export function CountdownTimer({ countdown, total, onRefresh, loading, paused, o
             </div>
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-div2-orange text-xs font-mono font-bold">{countdown}</span>
+              <span className="text-div2-orange text-xs font-bold">{countdown}</span>
             </div>
           )}
         </div>
 
         {/* Text */}
         <div className="text-left">
-          <p className="text-div2-muted text-xs font-mono uppercase tracking-widest leading-none mb-0.5">
+          <p className="text-div2-muted text-xs uppercase tracking-widest leading-none mb-0.5">
             {t('timer.label')}
           </p>
           <p className="text-div2-text text-sm font-semibold">
@@ -87,7 +87,7 @@ export function CountdownTimer({ countdown, total, onRefresh, loading, paused, o
         onClick={onTogglePause}
         className={`
           w-full flex items-center justify-center gap-2 px-4 py-1.5 rounded
-          bg-div2-surface border transition-all duration-200 cursor-pointer text-xs font-mono
+          bg-div2-surface border transition-all duration-200 cursor-pointer text-xs
           ${paused
             ? 'border-green-500/40 text-green-400 hover:border-green-500/60 hover:bg-green-500/10'
             : 'border-div2-border text-div2-muted hover:border-div2-orange/40 hover:text-div2-orange'

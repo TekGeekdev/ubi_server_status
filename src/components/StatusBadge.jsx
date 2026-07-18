@@ -48,7 +48,7 @@ export function StatusBadge({ status, size = 'md' }) {
   return (
     <span
       className={`
-        inline-flex items-center gap-2 rounded font-mono font-semibold tracking-wider uppercase
+        inline-flex items-center gap-2 rounded font-semibold tracking-wider uppercase
         border ${cfg.bg} ${cfg.border} ${cfg.color} ${cfg.glow} ${sizes[size]}
       `}
     >

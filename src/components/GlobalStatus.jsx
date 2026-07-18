@@ -33,7 +33,7 @@ export function GlobalStatus({ platforms }) {
       </div>
 
       <div>
-        <p className="text-div2-muted text-xs font-mono uppercase tracking-widest mb-0.5">{t('globalStatus.title')}</p>
+        <p className="text-div2-muted text-xs uppercase tracking-widest mb-0.5">{t('globalStatus.title')}</p>
         <p className={`${cfg.color} text-base font-semibold`}>{message}</p>
       </div>
     </div>

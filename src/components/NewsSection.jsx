@@ -34,7 +34,7 @@ function NewsCard({ article }) {
 				</div>
 			)}
 			<div className="p-4">
-				<div className="flex items-center gap-2 text-div2-muted text-xs font-mono mb-2">
+				<div className="flex items-center gap-2 text-div2-muted text-xs mb-2">
 					<span>{article.date}</span>
 					{article.readTime && (
 						<>
@@ -64,7 +64,7 @@ export function NewsSection() {
 		<section className="mt-10 border-t border-div2-border pt-6">
 			<div className="flex items-center gap-3 mb-6">
 				<div className="w-1 h-6 bg-div2-orange" />
-				<p className="text-div2-muted text-xs font-mono uppercase tracking-widest">
+				<p className="text-div2-muted text-xs uppercase tracking-widest">
 					{t('news.title')}
 				</p>
 			</div>
@@ -78,7 +78,7 @@ export function NewsSection() {
 				}
 			</div>
 
-			<p className="mt-4 text-right text-xs font-mono text-div2-muted/60">
+			<p className="mt-4 text-right text-xs text-div2-muted/60">
 				<a
 					href="https://www.ubisoft.com/en-us/game/the-division/the-division-2/news-updates"
 					target="_blank"

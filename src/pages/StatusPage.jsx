@@ -29,7 +29,7 @@ export function StatusPage() {
             <div className="flex items-center gap-3 mb-2">
               <div className="w-1 h-8 bg-div2-orange" />
               <div>
-                <p className="text-div2-muted text-xs font-mono uppercase tracking-[0.3em]">Tom Clancy's</p>
+                <p className="text-div2-muted text-xs uppercase tracking-[0.3em]">Tom Clancy's</p>
                 <h1
                   className="text-white text-3xl font-bold tracking-wider uppercase"
                 >
@@ -37,7 +37,7 @@ export function StatusPage() {
                 </h1>
               </div>
             </div>
-            <p className="text-div2-muted text-sm font-mono tracking-widest uppercase ml-4 pl-3 border-l border-div2-border">
+            <p className="text-div2-muted text-sm tracking-widest uppercase ml-4 pl-3 border-l border-div2-border">
               {t('header.subtitle')}
             </p>
           </div>
@@ -57,7 +57,7 @@ export function StatusPage() {
         </div>
 
         {/* Meta info */}
-        <div className="mt-4 flex items-center gap-4 text-xs font-mono text-div2-muted">
+        <div className="mt-4 flex items-center gap-4 text-xs text-div2-muted">
           <span className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-div2-muted" />
             {t('header.lastUpdated')} : {formatTime(lastFetch, locale)}
@@ -82,7 +82,7 @@ export function StatusPage() {
       </header>
 
       {/* Disclaimer */}
-      <div className="mb-4 px-4 py-3 rounded border border-div2-border bg-div2-surface/50 flex items-start gap-3 text-xs font-mono text-div2-muted">
+      <div className="mb-4 px-4 py-3 rounded border border-div2-border bg-div2-surface/50 flex items-start gap-3 text-xs text-div2-muted">
         <svg className="w-4 h-4 shrink-0 mt-0.5 text-div2-orange/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
         </svg>
@@ -110,7 +110,7 @@ export function StatusPage() {
 
       {/* Legend */}
       <div className="mt-6 border-t border-div2-border pt-6">
-        <p className="text-div2-muted text-xs font-mono uppercase tracking-widest mb-4">{t('legend.title')}</p>
+        <p className="text-div2-muted text-xs uppercase tracking-widest mb-4">{t('legend.title')}</p>
         <div className="flex flex-wrap gap-4">
           {['online', 'maintenance', 'degradation', 'interrupted'].map((status) => (
             <LegendItem key={status} status={status} label={t(`status.${status}`)} />

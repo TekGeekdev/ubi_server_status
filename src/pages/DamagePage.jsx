@@ -96,7 +96,7 @@ export function DamagePage() {
       {/* Header */}
       <header className="flex justify-between items-end flex-wrap gap-4 border-b border-div2-border pb-5 mb-8">
         <div>
-          <p className="text-div2-orange text-[11px] font-mono uppercase tracking-[0.28em]">
+          <p className="text-div2-orange text-[11px] uppercase tracking-[0.28em]">
             ISAC // Terminal Agent
           </p>
           <h1
@@ -112,7 +112,7 @@ export function DamagePage() {
         </div>
       </header>
 
-      <p className="mb-7 px-4 py-3 border border-div2-border bg-div2-surface/50 text-xs font-mono text-div2-muted">
+      <p className="mb-7 px-4 py-3 border border-div2-border bg-div2-surface/50 text-xs text-div2-muted">
         {t('damage.disclaimer')}
       </p>
 
@@ -137,7 +137,7 @@ export function DamagePage() {
           <NumberField label={t('damage.weapon.reload')} value={weapon.reload} onChange={setWeaponField('reload')} step={0.1} />
         </div>
         {weapon.chc > CHC_CAP * 100 && (
-          <p className="mt-3 font-mono text-xs text-div2-yellow">{t('damage.weapon.chcCap')}</p>
+          <p className="mt-3 text-xs text-div2-yellow">{t('damage.weapon.chcCap')}</p>
         )}
 
         <ResultGrid
@@ -170,7 +170,7 @@ export function DamagePage() {
           <NumberField label={t('damage.skill.sd')} value={skill.sd} onChange={setSkillField('sd')} />
           <NumberField label={t('damage.skill.amp')} value={skill.amp} onChange={setSkillField('amp')} />
         </div>
-        <p className="mt-3 font-mono text-xs text-div2-muted/70">{t('damage.skill.tierNote')}</p>
+        <p className="mt-3 text-xs text-div2-muted/70">{t('damage.skill.tierNote')}</p>
 
         <ResultGrid rows={[{ label: t('damage.skill.result'), value: formatNumber(skillResult), highlight: true }]} />
       </Panel>
@@ -182,7 +182,7 @@ export function DamagePage() {
         action={<ResetButton label={t('damage.reset')} onClick={() => setStatus({ ...STATUS_ZERO })} />}
       >
         <div className="flex items-center gap-2 flex-wrap mb-4">
-          <span className="font-mono text-xs uppercase tracking-widest text-div2-muted mr-2">
+          <span className="text-xs uppercase tracking-widest text-div2-muted mr-2">
             {t('damage.status.effect')}
           </span>
           {['burn', 'bleed', 'poison', 'custom'].map((preset) => (
@@ -190,7 +190,7 @@ export function DamagePage() {
               key={preset}
               type="button"
               onClick={() => selectPreset(preset)}
-              className={`clip-panel-sm px-3 py-1.5 text-xs font-mono font-bold uppercase tracking-widest border transition-all duration-150 ${
+              className={`clip-panel-sm px-3 py-1.5 text-xs font-bold uppercase tracking-widest border transition-all duration-150 ${
                 status.preset === preset
                   ? 'bg-div2-orange border-div2-orange text-div2-bg glow-orange'
                   : 'bg-div2-surface-raised border-div2-border text-div2-muted hover:text-div2-text hover:border-div2-muted'
@@ -207,7 +207,7 @@ export function DamagePage() {
           <NumberField label={t('damage.status.duration')} value={status.duration} onChange={setStatusField('duration')} step={0.5} />
           <NumberField label={t('damage.status.bonus')} value={status.bonus} onChange={setStatusField('bonus')} />
         </div>
-        <p className="mt-3 font-mono text-xs text-div2-muted/70">{t('damage.status.bonusNote')}</p>
+        <p className="mt-3 text-xs text-div2-muted/70">{t('damage.status.bonusNote')}</p>
 
         <ResultGrid
           rows={[
@@ -228,7 +228,7 @@ function ResetButton({ label, onClick }) {
     <button
       type="button"
       onClick={onClick}
-      className="clip-panel-sm px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-widest border bg-div2-surface-raised border-div2-border text-div2-muted hover:text-div2-text hover:border-div2-muted transition-all duration-150"
+      className="clip-panel-sm px-3 py-1 text-[10px] font-bold uppercase tracking-widest border bg-div2-surface-raised border-div2-border text-div2-muted hover:text-div2-text hover:border-div2-muted transition-all duration-150"
     >
       {label}
     </button>
@@ -240,7 +240,7 @@ function NumberField({ label, value, onChange, step = 1, min = 0, max }) {
     // h-full + mt-auto : les inputs restent alignés sur une même ligne
     // même quand certains libellés passent sur deux lignes
     <label className="flex h-full flex-col gap-1.5">
-      <span className="font-mono text-[10px] uppercase tracking-widest text-div2-muted">{label}</span>
+      <span className="text-[10px] uppercase tracking-widest text-div2-muted">{label}</span>
       <input
         type="number"
         value={value}
@@ -248,7 +248,7 @@ function NumberField({ label, value, onChange, step = 1, min = 0, max }) {
         max={max}
         step={step}
         onChange={(e) => onChange(Math.max(min, Number(e.target.value) || 0))}
-        className="mt-auto w-full px-3 py-2 bg-div2-bg border border-div2-border font-mono text-sm text-div2-text focus:border-div2-orange focus:outline-none transition-colors"
+        className="mt-auto w-full px-3 py-2 bg-div2-bg border border-div2-border text-sm text-div2-text focus:border-div2-orange focus:outline-none transition-colors"
       />
     </label>
   );
@@ -261,7 +261,7 @@ function ResultGrid({ rows }) {
         <div key={label} className="flex justify-between items-baseline gap-4">
           <span className="text-[13px] uppercase tracking-wide text-div2-text">{label}</span>
           <span
-            className={`font-mono text-right ${
+            className={`text-right ${
               highlight ? 'text-div2-orange text-lg font-bold' : 'text-div2-orange text-sm'
             }`}
           >

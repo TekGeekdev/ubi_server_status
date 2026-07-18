@@ -5,7 +5,7 @@ export function Panel({ title, hint, action, children }) {
       <div className="flex justify-between items-baseline flex-wrap gap-2 mb-4">
         <h2 className="text-base font-bold uppercase tracking-widest text-div2-text">{title}</h2>
         <div className="flex items-baseline flex-wrap gap-3">
-          {hint && <span className="text-xs font-mono text-div2-muted/70">{hint}</span>}
+          {hint && <span className="text-xs text-div2-muted/70">{hint}</span>}
           {action}
         </div>
       </div>

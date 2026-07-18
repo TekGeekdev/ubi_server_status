@@ -95,7 +95,7 @@ export function ExpertisePage() {
       {/* Header */}
       <header className="flex justify-between items-end flex-wrap gap-4 border-b border-div2-border pb-5 mb-8">
         <div>
-          <p className="text-div2-orange text-[11px] font-mono uppercase tracking-[0.28em]">
+          <p className="text-div2-orange text-[11px] uppercase tracking-[0.28em]">
             ISAC // Terminal Agent
           </p>
           <h1
@@ -111,7 +111,7 @@ export function ExpertisePage() {
         </div>
       </header>
 
-      <p className="mb-7 px-4 py-3 border border-div2-border bg-div2-surface/50 text-xs font-mono text-div2-muted">
+      <p className="mb-7 px-4 py-3 border border-div2-border bg-div2-surface/50 text-xs text-div2-muted">
         {t('expertise.disclaimer')}
       </p>
 
@@ -122,7 +122,7 @@ export function ExpertisePage() {
           {LEGEND_ORDER.map((mat) => (
             <span key={mat} className={`flex items-center gap-1.5 ${MATERIAL_COLORS[mat]}`}>
               <MaterialIcon material={mat} className="w-4 h-4 shrink-0" />
-              <span className="font-mono text-[11px] uppercase tracking-wide">
+              <span className="text-[11px] uppercase tracking-wide">
                 {t(`expertise.mat.${mat}`)}
               </span>
             </span>
@@ -148,14 +148,14 @@ export function ExpertisePage() {
           <button
             type="button"
             onClick={addItem}
-            className="clip-panel-sm px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-widest border bg-div2-orange border-div2-orange text-div2-bg glow-orange transition-all duration-150"
+            className="clip-panel-sm px-3 py-1 text-[10px] font-bold uppercase tracking-widest border bg-div2-orange border-div2-orange text-div2-bg glow-orange transition-all duration-150"
           >
             {t('expertise.items.add')}
           </button>
         }
       >
         {items.length === 0 ? (
-          <p className="font-mono text-xs text-div2-muted/60">{t('expertise.items.empty')}</p>
+          <p className="text-xs text-div2-muted/60">{t('expertise.items.empty')}</p>
         ) : (
           <div className="flex flex-col">
             {items.map((item) => (
@@ -191,7 +191,7 @@ export function ExpertisePage() {
                   onClick={() => removeItem(item.id)}
                   aria-label={t('expertise.items.remove')}
                   title={t('expertise.items.remove')}
-                  className="w-8 h-8 flex items-center justify-center bg-div2-surface-raised border border-div2-border text-div2-muted font-mono text-base hover:text-div2-red hover:border-div2-red/60 transition-colors"
+                  className="w-8 h-8 flex items-center justify-center bg-div2-surface-raised border border-div2-border text-div2-muted text-base hover:text-div2-red hover:border-div2-red/60 transition-colors"
                 >
                   ×
                 </button>
@@ -210,7 +210,7 @@ export function ExpertisePage() {
             <button
               type="button"
               onClick={exportTxt}
-              className="clip-panel-sm px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-widest border bg-div2-surface-raised border-div2-border text-div2-muted hover:text-div2-text hover:border-div2-muted transition-all duration-150"
+              className="clip-panel-sm px-3 py-1 text-[10px] font-bold uppercase tracking-widest border bg-div2-surface-raised border-div2-border text-div2-muted hover:text-div2-text hover:border-div2-muted transition-all duration-150"
             >
               {t('expertise.export')}
             </button>
@@ -218,7 +218,7 @@ export function ExpertisePage() {
         }
       >
         {costEntries.length === 0 ? (
-          <p className="font-mono text-xs text-div2-muted/60">{t('expertise.results.empty')}</p>
+          <p className="text-xs text-div2-muted/60">{t('expertise.results.empty')}</p>
         ) : (
           <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-x-8 gap-y-2">
             {costEntries.map(({ material, amount }) => (
@@ -229,7 +229,7 @@ export function ExpertisePage() {
                     {t(`expertise.mat.${material}`)}
                   </span>
                 </span>
-                <span className="font-mono text-sm text-div2-orange">{formatNumber(amount)}</span>
+                <span className="text-sm text-div2-orange">{formatNumber(amount)}</span>
               </div>
             ))}
           </div>
@@ -253,7 +253,7 @@ function CostMatrix({ type, hoverLevel, onHoverLevel }) {
         {t(`expertise.type.${type}`)}
       </h3>
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[220px] border-collapse font-mono text-[10px]">
+        <table className="w-full min-w-[220px] border-collapse text-[10px]">
           <thead>
             <tr>
               <th className="px-1.5 pb-1.5 text-left align-bottom text-div2-muted uppercase border-b border-div2-border">
@@ -327,11 +327,11 @@ function CostMatrix({ type, hoverLevel, onHoverLevel }) {
 function SelectField({ label, value, onChange, options }) {
   return (
     <label className="flex h-full flex-col gap-1.5">
-      <span className="font-mono text-[10px] uppercase tracking-widest text-div2-muted">{label}</span>
+      <span className="text-[10px] uppercase tracking-widest text-div2-muted">{label}</span>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-auto w-full px-3 py-2 bg-div2-bg border border-div2-border font-mono text-sm text-div2-text focus:border-div2-orange focus:outline-none transition-colors"
+        className="mt-auto w-full px-3 py-2 bg-div2-bg border border-div2-border text-sm text-div2-text focus:border-div2-orange focus:outline-none transition-colors"
       >
         {options.map(({ value: optionValue, label: optionLabel }) => (
           <option key={optionValue} value={optionValue}>
@@ -346,7 +346,7 @@ function SelectField({ label, value, onChange, options }) {
 function LevelField({ label, value, onChange, min, max }) {
   return (
     <label className="flex h-full flex-col gap-1.5">
-      <span className="font-mono text-[10px] uppercase tracking-widest text-div2-muted">{label}</span>
+      <span className="text-[10px] uppercase tracking-widest text-div2-muted">{label}</span>
       <input
         type="number"
         value={value}
@@ -357,7 +357,7 @@ function LevelField({ label, value, onChange, min, max }) {
           const parsed = Math.round(Number(e.target.value) || 0);
           onChange(Math.min(max, Math.max(min, parsed)));
         }}
-        className="mt-auto w-full px-3 py-2 bg-div2-bg border border-div2-border font-mono text-sm text-div2-text focus:border-div2-orange focus:outline-none transition-colors"
+        className="mt-auto w-full px-3 py-2 bg-div2-bg border border-div2-border text-sm text-div2-text focus:border-div2-orange focus:outline-none transition-colors"
       />
     </label>
   );
