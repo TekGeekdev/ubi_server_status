@@ -52,7 +52,6 @@ export function AugmentsPage() {
           </p>
           <h1
             className="text-white text-3xl sm:text-4xl font-bold uppercase tracking-wide leading-tight mt-1.5"
-            style={{ fontFamily: 'Rajdhani, sans-serif' }}
           >
             {t('augments.titlePrefix')}{' '}
             <span className="text-div2-orange">{t('augments.titleAccent')}</span>
@@ -309,7 +308,6 @@ function CostStat({ value, label }) {
     <div className="border-l-2 border-div2-orange pl-4">
       <p
         className="text-4xl font-bold text-div2-orange leading-none"
-        style={{ fontFamily: 'Rajdhani, sans-serif' }}
       >
         {value}
       </p>

@@ -6,10 +6,7 @@
   body {
     background-color: #070c13;
     color: #c8d8e8;
-    font-family: 'Rajdhani', sans-serif;
-    /* Rajdhani est très condensée : espacement global pour la lisibilité,
-       en rem pour rester constant quelle que soit la taille de police */
-    letter-spacing: 0.065rem;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 

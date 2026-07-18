@@ -101,7 +101,6 @@ export function DamagePage() {
           </p>
           <h1
             className="text-white text-3xl sm:text-4xl font-bold uppercase tracking-wide leading-tight mt-1.5"
-            style={{ fontFamily: 'Rajdhani, sans-serif' }}
           >
             {t('damage.titlePrefix')}{' '}
             <span className="text-div2-orange">{t('damage.titleAccent')}</span>

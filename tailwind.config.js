@@ -22,15 +22,8 @@ export default {
         },
       },
       fontFamily: {
+        sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
         mono: ['JetBrains Mono', 'Consolas', 'monospace'],
-      },
-      // Rajdhani est très condensée : plancher global à 0.065rem, aucun
-      // texte du site ne doit descendre en dessous (cf. body dans index.css)
-      letterSpacing: {
-        normal: '0.065rem',
-        wide: '0.065rem',
-        wider: '0.09rem',
-        widest: '0.12rem',
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',

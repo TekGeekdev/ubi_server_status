@@ -72,7 +72,7 @@ export function PlatformCard({ platform }) {
           <span className={`${cfg.color} opacity-80`}><Icon /></span>
           <div>
             <p className="text-div2-muted text-xs font-mono uppercase tracking-widest mb-0.5">{t('platform.title')}</p>
-            <h2 className="text-white text-xl font-bold tracking-wide" style={{ fontFamily: 'Rajdhani, sans-serif' }}>
+            <h2 className="text-white text-xl font-bold tracking-wide">
               {name}
             </h2>
           </div>

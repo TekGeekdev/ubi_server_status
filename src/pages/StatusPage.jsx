@@ -32,7 +32,6 @@ export function StatusPage() {
                 <p className="text-div2-muted text-xs font-mono uppercase tracking-[0.3em]">Tom Clancy's</p>
                 <h1
                   className="text-white text-3xl font-bold tracking-wider uppercase"
-                  style={{ fontFamily: 'Rajdhani, sans-serif' }}
                 >
                   The Division 2
                 </h1>
