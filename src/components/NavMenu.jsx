@@ -14,7 +14,7 @@ export function NavMenu({ route }) {
   const themeLabel = theme === 'light' ? t('theme.night') : t('theme.day');
 
   return (
-    <nav className="mb-8 flex items-center gap-2 border-b border-div2-border pb-4">
+    <nav className="mb-8 flex flex-wrap items-center gap-2 border-b border-div2-border pb-4">
       <span className="hidden sm:inline text-div2-orange text-[11px] uppercase tracking-[0.28em] mr-2">
         ISAC //
       </span>
