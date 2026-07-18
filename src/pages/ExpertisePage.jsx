@@ -229,7 +229,7 @@ export function ExpertisePage() {
                     {t(`expertise.mat.${material}`)}
                   </span>
                 </span>
-                <span className="text-sm text-div2-orange">{formatNumber(amount)}</span>
+                <span className="text-base font-bold text-div2-orange">{formatNumber(amount)}</span>
               </div>
             ))}
           </div>
@@ -253,7 +253,7 @@ function CostMatrix({ type, hoverLevel, onHoverLevel }) {
         {t(`expertise.type.${type}`)}
       </h3>
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[220px] border-collapse text-[10px]">
+        <table className="w-full min-w-[220px] border-collapse text-xs">
           <thead>
             <tr>
               <th className="px-1.5 pb-1.5 text-left align-bottom text-div2-muted uppercase border-b border-div2-border">
